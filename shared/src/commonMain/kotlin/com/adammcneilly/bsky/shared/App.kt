@@ -6,6 +6,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.adammcneilly.bsky.shared.ui.components.SkyBottomBar
+import com.adammcneilly.bsky.shared.ui.components.SkyTopBar
 import com.adammcneilly.bsky.shared.ui.theme.SkyTheme
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
@@ -14,6 +15,9 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 fun App() {
     SkyTheme {
         Scaffold(
+            topBar = {
+                SkyTopBar()
+            },
             bottomBar = {
                 SkyBottomBar(
                     onTabClicked = { tab ->
