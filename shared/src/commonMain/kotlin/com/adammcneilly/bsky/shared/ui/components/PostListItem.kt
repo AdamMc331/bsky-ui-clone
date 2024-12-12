@@ -1,21 +1,16 @@
 package com.adammcneilly.bsky.shared.ui.components
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.outlined.Reply
 import androidx.compose.material.icons.filled.Shuffle
 import androidx.compose.material.icons.outlined.*
-import androidx.compose.material3.Icon
-import androidx.compose.material3.LocalContentColor
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -29,18 +24,50 @@ fun PostListItem(
     Row(
         horizontalArrangement = Arrangement.spacedBy(8.dp),
         modifier = modifier
-            .padding(16.dp),
+            .height(IntrinsicSize.Min)
+            .padding(
+                horizontal = 16.dp,
+            ),
     ) {
-        ImageWrapper(
-            image = post.authorImage,
-            contentDescription = "${post.authorName} Profile Image",
-            contentScale = ContentScale.Crop,
-            modifier = Modifier
-                .size(36.dp)
-                .clip(CircleShape),
-        )
+        Column {
+            if (post.isReplyPost) {
+                Box(
+                    modifier = Modifier
+                        .background(color = MaterialTheme.colorScheme.outlineVariant)
+                        .width(1.dp)
+                        .weight(1F)
+                        .align(Alignment.CenterHorizontally),
+                )
+            }
 
-        PostInfo(post)
+            val imageTopPadding = if (post.isReplyPost) {
+                0.dp
+            } else {
+                16.dp
+            }
+
+            val imageBottomPadding = if (post.isParentPost) {
+                0.dp
+            } else {
+                16.dp
+            }
+
+            if (post.isParentPost) {
+                Box(
+                    modifier = Modifier
+                        .background(color = MaterialTheme.colorScheme.outlineVariant)
+                        .width(1.dp)
+                        .weight(1F)
+                        .align(Alignment.CenterHorizontally),
+                )
+            }
+        }
+
+        PostInfo(
+            post = post,
+            modifier = Modifier
+                .padding(vertical = 16.dp),
+        )
     }
 }
 

@@ -1,6 +1,8 @@
 package com.adammcneilly.bsky.shared
 
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -36,13 +38,54 @@ fun App() {
                 replies = 57,
                 reposts = 8,
                 likes = 345,
+                isParentPost = true,
+                isReplyPost = false,
             )
 
-            PostListItem(
-                post = testPost,
+            val testReply = Post(
+                authorImage = UiImage.Local(Res.drawable.bsky),
+                authorName = "Adam McNeilly",
+                authorHandle = "@adammc.bsky.social",
+                timeSincePost = "30m",
+                postText = "Ratiod",
+                replies = 0,
+                reposts = 1000,
+                likes = 500000,
+                isParentPost = false,
+                isReplyPost = true,
+            )
+
+            val testRandomPost = Post(
+                authorImage = UiImage.Local(Res.drawable.bsky),
+                authorName = "Adam McNeilly",
+                authorHandle = "@adammc.bsky.social",
+                timeSincePost = "2h",
+                postText = "Shower Thought",
+                replies = 0,
+                reposts = 0,
+                likes = 0,
+                isParentPost = false,
+                isReplyPost = false,
+            )
+
+            Column(
                 modifier = Modifier
                     .padding(scaffoldPadding),
-            )
+            ) {
+                PostListItem(
+                    post = testPost,
+                )
+
+                PostListItem(
+                    post = testReply,
+                )
+
+                HorizontalDivider()
+
+                PostListItem(
+                    post = testRandomPost,
+                )
+            }
         }
     }
 }

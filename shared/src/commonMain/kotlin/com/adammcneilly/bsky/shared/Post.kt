@@ -11,4 +11,6 @@ data class Post(
     val replies: Int,
     val reposts: Int,
     val likes: Int,
+    val isParentPost: Boolean,
+    val isReplyPost: Boolean,
 )
