@@ -12,7 +12,7 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
-rootProject.name = "template"
+rootProject.name = "BskyClone"
 include(":androidApp")
 include(":desktopApp")
 include(":shared")
