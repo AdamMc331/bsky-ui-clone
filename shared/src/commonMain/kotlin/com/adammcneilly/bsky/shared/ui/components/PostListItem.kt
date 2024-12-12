@@ -1,6 +1,5 @@
 package com.adammcneilly.bsky.shared.ui.components
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
@@ -25,55 +24,41 @@ fun PostListItem(
     modifier: Modifier = Modifier,
 ) {
     Row(
-        horizontalArrangement = Arrangement.spacedBy(8.dp),
+        horizontalArrangement = Arrangement.spacedBy(16.dp),
         modifier = modifier
             .height(IntrinsicSize.Min)
             .padding(
                 horizontal = 16.dp,
             ),
     ) {
-        Column {
-            if (post.isReplyPost) {
-                Box(
-                    modifier = Modifier
-                        .background(color = MaterialTheme.colorScheme.outlineVariant)
-                        .width(1.dp)
-                        .weight(1F)
-                        .align(Alignment.CenterHorizontally),
-                )
-            }
-
-            val imageTopPadding = if (post.isReplyPost) {
-                0.dp
-            } else {
-                16.dp
-            }
-
-            val imageBottomPadding = if (post.isParentPost) {
-                0.dp
-            } else {
-                16.dp
-            }
+        Box {
+            val imageVerticalPadding = 16.dp
+            val imageSize = 36.dp
 
             ImageWrapper(
                 image = post.authorImage,
                 contentDescription = "${post.authorName} Profile Image",
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
-                    .padding(
-                        top = imageTopPadding,
-                        bottom = imageBottomPadding,
-                    ).size(36.dp)
+                    .padding(vertical = imageVerticalPadding)
+                    .size(imageSize)
                     .clip(CircleShape),
             )
 
-            if (post.isParentPost) {
-                Box(
+            val threadTarget = when {
+                post.isParentPost -> ThreadIndicatorTarget.BOTTOM
+                post.isReplyPost -> ThreadIndicatorTarget.TOP
+                else -> null
+            }
+
+            if (threadTarget != null) {
+                val imageCenter = (imageVerticalPadding + (imageSize / 2))
+
+                ThreadIndicator(
+                    startOffset = imageCenter,
+                    target = threadTarget,
                     modifier = Modifier
-                        .background(color = MaterialTheme.colorScheme.outlineVariant)
-                        .width(1.dp)
-                        .weight(1F)
-                        .align(Alignment.CenterHorizontally),
+                        .align(Alignment.Center),
                 )
             }
         }
