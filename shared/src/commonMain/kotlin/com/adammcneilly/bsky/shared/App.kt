@@ -2,9 +2,10 @@ package com.adammcneilly.bsky.shared
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import com.adammcneilly.bsky.shared.ui.UiImage
+import com.adammcneilly.bsky.shared.ui.components.PostListItem
 import com.adammcneilly.bsky.shared.ui.components.SkyBottomBar
 import com.adammcneilly.bsky.shared.ui.components.SkyTopBar
 import com.adammcneilly.bsky.shared.ui.theme.SkyTheme
@@ -26,8 +27,19 @@ fun App() {
                 )
             },
         ) { scaffoldPadding ->
-            Text(
-                text = "App Stub",
+            val testPost = Post(
+                authorImage = UiImage.Local(Res.drawable.bsky),
+                authorName = "Hank Green",
+                authorHandle = "@hankgreen.bsky.social",
+                timeSincePost = "1h",
+                postText = "Everyone was complaining about Connections today but I thought it was super fun...",
+                replies = 57,
+                reposts = 8,
+                likes = 345,
+            )
+
+            PostListItem(
+                post = testPost,
                 modifier = Modifier
                     .padding(scaffoldPadding),
             )
