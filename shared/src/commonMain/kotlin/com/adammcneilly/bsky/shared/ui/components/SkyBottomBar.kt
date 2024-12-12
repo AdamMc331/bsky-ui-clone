@@ -11,14 +11,9 @@ import com.adammcneilly.bsky.shared.HomeTab
 fun SkyBottomBar(
     onTabClicked: (HomeTab) -> Unit,
     tabs: List<HomeTab> = HomeTab.entries,
-//    selectedTab: HomeTab = tabs.first(),
+    selectedTab: HomeTab = tabs.first(),
     modifier: Modifier = Modifier,
 ) {
-    // TODO: Pull this out of here
-    var selectedTab by remember {
-        mutableStateOf(tabs.first())
-    }
-
     NavigationBar(
         modifier = modifier,
     ) {
@@ -28,8 +23,7 @@ fun SkyBottomBar(
             NavigationBarItem(
                 selected = isSelected,
                 onClick = {
-                    selectedTab = tab
-//                    onTabClicked.invoke(tab)
+                    onTabClicked.invoke(tab)
                 },
                 icon = {
                     val imageVector = if (isSelected) {
