@@ -2,6 +2,7 @@ package com.adammcneilly.bsky.shared.ui.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.outlined.Reply
 import androidx.compose.material.icons.filled.Shuffle
@@ -10,7 +11,9 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -51,6 +54,18 @@ fun PostListItem(
             } else {
                 16.dp
             }
+
+            ImageWrapper(
+                image = post.authorImage,
+                contentDescription = "${post.authorName} Profile Image",
+                contentScale = ContentScale.Crop,
+                modifier = Modifier
+                    .padding(
+                        top = imageTopPadding,
+                        bottom = imageBottomPadding,
+                    ).size(36.dp)
+                    .clip(CircleShape),
+            )
 
             if (post.isParentPost) {
                 Box(
