@@ -18,7 +18,7 @@ ksp = "2.0.21-1.0.28"
 leakCanary = "2.14"
 material = "1.12.0"
 minSdk = "21"
-sortDependencies = "0.13"
+sortDependencies = "0.14"
 testParameterInjector = "1.18"
 
 [libraries]
