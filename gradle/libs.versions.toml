@@ -19,7 +19,7 @@ leakCanary = "2.14"
 material = "1.13.0"
 minSdk = "21"
 sortDependencies = "0.14"
-testParameterInjector = "1.18"
+testParameterInjector = "1.20"
 
 [libraries]
 android-material = { module = "com.google.android.material:material", version.ref = "material" }
